@@ -7,3 +7,6 @@ from django.utils import timezone
 def post_list(request):
     posts = Post.objects.filter(published_time__lte=timezone.now()).order_by('published_time')
     return render(request, 'blog/post_list.html', {'posts':posts})
+
+def homepage(request):
+    return render(request,'blog/Index.html',{})
