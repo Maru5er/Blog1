@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Post Lists</title>
-</head>
-<body>
-<header>
-    <h1>Welcome to my website Anjing</h1>
-    <p><e>Halo Goblog!</e></p>
-</header>
-<div>
-    <article>
+{%extends 'blog/base.html'%}
+{%block content%}
         {% for post in posts %}
-        <h2>{{post.title}}</h2>
+        <h2><a href="{%url 'post_detail' pk=post.pk %}" >{{post.title}}</a></h2>
         <p>{{post.text}}</p>
         <time>{{post.published_time}}</time>
         {% endfor %}
-
-    </article>
-
-</div>
-</body>
-</html>
+{%endblock%}

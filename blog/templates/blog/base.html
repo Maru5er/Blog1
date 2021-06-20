@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>base</title>
 </head>
 <body>
-$END$
+    <header class="page-header">
+      <div class="container">
+          <a href="{% url 'post_new' %}" class="top-menu">
+                 {% include './icons/1570429633bomb.svg' %}
+          </a>
+          <h1><a href="/">Make SA Hall great I guess</a></h1>
+          <h3>click on the bomb to add post</h3>
+      </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="col">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </main>
 </body>
 </html>
