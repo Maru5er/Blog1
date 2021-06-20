@@ -7,12 +7,13 @@
 <body>
 <header>
     <h1>Welcome to my website Anjing</h1>
-    <p><e>Halo Goblog!, {{posts}}</e></p>
+    <p><e>Halo Goblog!</e></p>
 </header>
 <div>
     <article>
         {% for post in posts %}
-        <h2>{{post}}</h2>
+        <h2>{{post.title}}</h2>
+        <p>{{post.text}}</p>
         {% endfor %}
 
     </article>
