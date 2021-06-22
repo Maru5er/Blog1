@@ -2,7 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from.models import Post
 from django.utils import timezone
-from .forms import PostForm
+from .forms import PostForm, Registration
+from django.contrib.auth import login
+from django.contrib import messages
+
 
 # Create your views here.
 def post_list(request):
@@ -28,4 +31,17 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})
+
+def registration(request):
+    if request.method == 'POST':
+        form = Registration(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            messages.success(request, 'Registration successfull!')
+            return redirect('post_list')
+        messages.error(request, 'Failed registration. Invalid info.')
+        form = Registration
+        return render(request, 'blog/registration.html', {'register_form': form})
+
 
