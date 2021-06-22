@@ -9,6 +9,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text',)
 
+#registration form
 class Registration(UserCreationForm):
     email = forms.EmailField(required=True)
 

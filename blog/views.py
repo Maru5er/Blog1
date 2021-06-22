@@ -32,6 +32,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})
 
+#registration view
 def registration(request):
     if request.method == 'POST':
         form = Registration(request.POST)
@@ -43,5 +44,7 @@ def registration(request):
         messages.error(request, 'Failed registration. Invalid info.')
         form = Registration
         return render(request, 'blog/registration.html', {'register_form': form})
+
+
 
 
