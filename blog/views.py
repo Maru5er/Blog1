@@ -34,20 +34,18 @@ def post_new(request):
 
 #registration view
 def registration(request):
-    form = Registration(request.POST)
     if request.method == 'POST':
+        form = Registration(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request,user)
+            login(request, user)
             messages.success(request, 'Registration successfull!')
             return redirect('post_list')
-
         messages.error(request, 'Failed registration. Invalid info.')
         return render(request, 'blog/registration.html', {'register_form': form})
 
     else:
         form = Registration()
-
     return render(request, 'blog/registration.html', context={'form': form})
 
 
