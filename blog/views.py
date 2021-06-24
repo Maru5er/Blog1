@@ -45,8 +45,8 @@ def registration(request):
         messages.error(request, 'Failed registration. Invalid info.')
         return render(request, 'blog/registration.html', {'register_form': form})
 
-    else:
-        return render(request, 'blog/registration.html', context={'form': form})
+
+    return render(request, 'blog/registration.html', context={'form': form})
 
 
 
