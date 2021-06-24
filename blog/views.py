@@ -34,7 +34,7 @@ def post_new(request):
 
 #registration view
 def registration(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = Registration(request.POST)
         if form.is_valid():
             user = form.save()
