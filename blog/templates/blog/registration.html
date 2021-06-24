@@ -3,7 +3,7 @@
 {%block content%}
     <h1>Welcome. Let's get started on your registration bitch.</h1>
     <form method="POST" class="register">{% csrf_token %}
-    {{register_form.as_p}}
+    {{form.as_p}}
     <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {%endblock%}
