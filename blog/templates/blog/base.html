@@ -10,7 +10,7 @@
           <a href="{% url 'post_new' %}" class="top-menu">
                  {% include './icons/1570429633bomb.svg' %}
           </a>
-          <h1><a href="/">Make SA Hall great I guess</a></h1>
+          <h1><a href="/">Make SA great I guess</a></h1>
           {% if user.is_authenticated %}
             <h3>welcome, {{user.get_username}} click on the bomb to add post</h3>
           {% else %}
