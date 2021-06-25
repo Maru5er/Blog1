@@ -1,9 +1,20 @@
-{% extends 'blog/base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>new post</title>
     <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <form method="POST" class="post-form">{% csrf_token %}
+
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    {% else %}
+        <h2> You dumb fuck you're not registered yet</h2>
+        <h3><a href ="{% url 'registration' " class ="registration button">click here to register... smh</a></h3>
+    {% endif %}
+</body>
+</html>

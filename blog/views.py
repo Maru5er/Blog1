@@ -12,12 +12,15 @@ def post_list(request):
     posts = Post.objects.filter(published_time__lte=timezone.now()).order_by('published_time')
     return render(request, 'blog/post_list.html', {'posts':posts})
 
+
 def homepage(request):
     return render(request,'blog/Index.html',{})
+
 
 def post_detail(request,pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html',{'post':post})
+
 
 def post_new(request):
     if request.method == "POST":
@@ -32,7 +35,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})
 
-#registration view
+
 def registration(request):
     if request.method == "POST":
         form = Registration(request.POST)
