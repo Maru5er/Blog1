@@ -14,7 +14,7 @@
           {% if user.is_authenticated %}
             <h3>welcome, {{user.get_username}} click on the bomb to add post</h3>
           {% else %}
-            <h3>you are not registered yet dumbass</h3>
+            <h3>You are not registered yet dumbass</h3>
             <h3><a href="{%url 'registration'%}" class="registration button">click here to register</a></h3>
           {% endif %}
       </div>
