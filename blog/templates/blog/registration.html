@@ -1,9 +1,15 @@
-{%extends 'blog/base.html'%}
-
-{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <h2>Registration</h2>
+</head>
+<body>
     <h1>Welcome. Let's get started on your registration bitch.</h1>
     <form method="POST" class="register">{% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="save btn btn-default">Save</button>
     </form>
-{%endblock%}
+</body>
+</html>
