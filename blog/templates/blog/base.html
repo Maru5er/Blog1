@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>base</title>
+    <title>SA Boleh</title>
 </head>
 <body>
+    <!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/">Welcome, {{user.username}}</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+
+      {% endif %}
+    </ul>
+  </div>
+</nav>
     <header class="page-header">
       <div class="container">
           <a href="{% url 'post_new' %}" class="top-menu">
@@ -14,8 +41,9 @@
           {% if user.is_authenticated %}
             <h3>welcome, {{user.get_username}} click on the bomb to add post</h3>
           {% else %}
-            <h3>You are not registered yet dumbass</h3>
-            <h3><a href="{%url 'registration'%}" class="registration button">click here to register</a></h3>
+            <h3>You are not logged in yet dumbass</h3>
+            <h3><a href="{%url 'registration'%}" class="registration button">Don't have an account? click here to register</a></h3>
+            <h3><a href="{%url 'login'%}" class="login">click here to login if you have an account</h3>
           {% endif %}
       </div>
     </header>

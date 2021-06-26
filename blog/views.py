@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from.models import Post
+from.models import Post, Comment
 from django.utils import timezone
-from .forms import PostForm, Registration
-from django.contrib.auth import login
+from .forms import PostForm, Registration, PostComment
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
@@ -19,7 +20,22 @@ def homepage(request):
 
 def post_detail(request,pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html',{'post':post})
+    new_comment = None
+    comments = post.comments.filter(active = True)
+    if request.method == "POST":
+        form = PostComment(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.post = post
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form=PostComment()
+    return render(request, 'blog/post_detail.html', {'form': form,
+                                                     'post':post,
+                                                     'new_comment': new_comment,
+                                                     'comments': comments})
 
 
 def post_new(request):
@@ -36,6 +52,9 @@ def post_new(request):
     return render(request, 'blog/post_new.html', {'form': form})
 
 
+
+
+
 def registration(request):
     if request.method == "POST":
         form = Registration(request.POST)
@@ -50,6 +69,36 @@ def registration(request):
     else:
         form = Registration()
     return render(request, 'blog/registration.html', context={'form': form})
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, 'welcome, you are now logged in as {}'.format(username))
+                return redirect('post_list')
+            else:
+                messages.error(request, 'Invalid Username or Password')
+        else:
+            messages.error(request, "Invalid username or password.")
+
+    form = AuthenticationForm()
+    return render(request, 'blog/login.html', {'form': form})
+
+
+def logout_request(request):
+    logout(request)
+    return redirect('post_list')
+
+
+
+
+
 
 
 

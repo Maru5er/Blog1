@@ -9,6 +9,19 @@
 <body>
 <h1>{{post.title}}</h1>
 <p>{{post.text}}</p>
+<form method="POST">{% csrf_token %}
+    <h2>{{form.as_p}}</h2>
+    <p><input type="submit" value="Add comment"></p>
+</form>
+
+{% for comments in comments reversed %}
+  <div class="comment">
+    <p>by {{comments.author}} on {{comments.comment_time}}</p>
+    {{ comments.text|linebreaks }}
+  </div>
+{% empty %}
+  <p>There are no comments yet.</p>
+{% endfor %}
 
 </body>
 </html>
